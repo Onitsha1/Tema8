@@ -2,12 +2,19 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
+        /* Creamos una instancia de la clase Usuario para poder usar sus métodos. */
         Usuario gestion = new Usuario("gestion", "gestion", "gestion", "gestion");
         String numeroIndicado = "";
         int opcion = 0;
         boolean incorrecto = true;
         String decision = "";
 
+        /*
+         * Este do while sirve para que el actor introduzca una opción de acción. Si
+         * escribe una opción diferente a lo
+         * que se le pide, le indicará que es un error y tendrá que introducirlo de
+         * nuevo.
+         */
         do {
             try {
                 System.out.println("Escriba un número para la acción que desee realizar.");
@@ -27,6 +34,11 @@ public class App {
             }
         } while (incorrecto);
 
+        /*
+         * En este switch case, utilizando el input del do while anterior, se elige que
+         * acción
+         * se quiere realizar.
+         */
         switch (opcion) {
             case 1:
 
@@ -45,8 +57,6 @@ public class App {
             case 2:
                 gestion.inicioSesion();
                 break;
-
         }
     }
-
 }

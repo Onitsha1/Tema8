@@ -43,12 +43,17 @@ public class Usuario {
 
     /*
      * Este método se usa para obtener los diferentes atributos de la clase Usuario
-     * (datos)
+     * (datos). Si se introducen valores incorrectos, se indicará y volverá a pedir
+     * los datos de nuevo.
      */
     public void introducirDatos() {
         String pruebaNombre;
         String pruebaApellido;
         String pruebaCorreoElectronico;
+        String pruebaContraseña;
+        String pruebaContraseña2;
+        String pruebaContraseña3;
+        boolean error = true;
         boolean error1 = true;
         boolean error2 = true;
         boolean error3 = true;
@@ -97,14 +102,9 @@ public class Usuario {
          * para comprobar que coinciden. Si no coincide, nos lo indicará y habrá que
          * introducir las contraseñas de nuevo.
          * Si sí coindice, se guardará como contraseña junto al correo electrónico
-         * en un HashMap llamado credenciales siendo el correo la clave y la contraseña
-         * el valor.
+         * en un HashMap llamado credenciales que usaremos para iniciar sesión
+         * siendo el correo la clave y la contraseña el valor.
          */
-
-        boolean error = true;
-        String pruebaContraseña;
-        String pruebaContraseña2;
-        String pruebaContraseña3 = "";
 
         do {
             System.out.print("Escriba su contraseña: ");
@@ -136,7 +136,6 @@ public class Usuario {
         } while (error);
 
         credenciales.put(correoElectronico, contraseña);
-
     }
 
     /* Asignamos roles a un objeto para poder crear la asociación a cada rol. */
@@ -184,19 +183,19 @@ public class Usuario {
             case "Laboratorio":
                 registroLaboratorio();
                 break;
-
-            default:
-                System.out.println("Departamento no valido.");
         }
-
     }
 
     /*
-     * Si se elige el rol Farmacia, con este bucle for se crea una instancia de
-     * usuario ligada al rol Farmacia (farmaceutico).
+     * Dependiendo del rol que se elija, con estos bucles for se crea una instancia
+     * de usuario ligada al rol (farmaceutico o tecnicoFarmacia) y al final nos
+     * muestra
+     * la comprobación de permisos. Las instancias se guardan en un arrayList por
+     * separado según el rol.
      */
     public void registroFarmacia() {
         Usuario farmaceutico;
+
         for (int i = 0; i < PERSONAL_CONTRATADO; i++) {
             farmaceutico = new Usuario(nombre, apellido, correoElectronico, contraseña);
             farmaceutico.introducirDatos();
@@ -209,6 +208,7 @@ public class Usuario {
 
     public void registroLaboratorio() {
         Usuario tecnicoLaboratorio;
+
         for (int i = 0; i < PERSONAL_CONTRATADO; i++) {
             tecnicoLaboratorio = new Usuario(nombre, apellido, correoElectronico, contraseña);
             tecnicoLaboratorio.introducirDatos();
@@ -219,12 +219,20 @@ public class Usuario {
         }
     }
 
+    /*
+     * Con este método se realizará el inicio de sesión utilizando los datos del
+     * HashMap credenciales.
+     * Pedirá correo y contraseña, si el correo no se encuentra en el Hashmap, dirá
+     * que no existe esa cuenta.
+     * Si sí se encuentra, comprobará el valor (contraseña) asociado al correo
+     * introducido, que es la clave (correo electronico).
+     * Si no coincide, dirá que o el correo o la clave son incorrectos y nos pedirá
+     * introducir estos datos de nuevo.
+     */
     public void inicioSesion() {
-
         boolean fallo = true;
 
         do {
-
             System.out.print("Introduzca su correo electronico: ");
             correoElectronico = lector.nextLine();
             System.out.print("Introduzca su contraseña: ");
@@ -243,9 +251,7 @@ public class Usuario {
                     System.out.println("Correo electronico o contraseña invalida");
                 }
             }
-
         } while (fallo);
 
     }
-
 }
