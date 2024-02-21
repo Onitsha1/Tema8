@@ -36,8 +36,7 @@ public class App {
 
         /*
          * En este switch case, utilizando el input del do while anterior, se elige que
-         * acción
-         * se quiere realizar.
+         * acción se quiere realizar.
          */
         switch (opcion) {
             case 1:
