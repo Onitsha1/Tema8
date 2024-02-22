@@ -5,7 +5,7 @@ import java.util.regex.*;
 
 public class Usuario {
 
-    static public Scanner lector = new Scanner(System.in);
+    static Scanner lector = new Scanner(System.in);
     private String nombre;
     private String apellido;
     private String correoElectronico;
